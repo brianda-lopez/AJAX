@@ -11,7 +11,7 @@
 <body>
     <header>
         <h1> Click the buttoms for surprise</h1>
-        <button id="animal-button" class="btn btn-default btn-lg vis-button">Lizard</button>
+        <button id="lizard" class="btn btn-default btn-lg vis-button">Lizard</button>
 
     </header>
 
@@ -21,26 +21,36 @@
     
     <script>
 
-        $("#animal-button").on("click", function () {
+        $("#lizard").on("click", function () {
             console.log ("welcome");
 
         var lizards = $.get("http://api.giphy.com/v1/gifs/search?q=lizards&api_key=7gUqZcYcub8Ff1HgpcwaYhl5N0a6EtDb&limit=5");
         lizards.done(function (d) {
             console.log(d.data);
+             
+            var results = d.data;
+            for (var i = 0; i < results.length; i++){
+            
+            if (results[i].rating == "g") {
+              
+              var gifDiv = $("<div>");
 
-            var lizardsImage = $("<div>");
-            var lizardsImage = $("<img>");
-            $("#animal-gif").val();
-            
-            var imageUrl=data.images.fixed_height_still;
-       
-        lizardsImage.attr(imageUrl);
-        lizardsImage.attr("alt", "lizard image");
-        $("#animal-gif").prepend("src",lizardsImage);
-            
+              var rating = results[i].rating;
+
+              var lizzy = $("<p>").text("Rating: " + rating);
+
+              var lizardImage = $("<img>");
+             
+              lizardImage.attr("src", results[i].images.fixed_height_still.url);
+              
+              gifDiv.append(lizzy);
+              gifDiv.append(lizardImage);
+              $("#animal-gif").prepend(gifDiv);
+            }
+          }
         });
     });
-       
-    </script>
+  </script>
+
 </body>
 </html>
