@@ -11,7 +11,7 @@
 <body>
     <header>
         <h1> Click the buttoms for surprise</h1>
-        <button id="lizard" class="btn btn-default btn-lg vis-button">Lizard</button>
+        <button id="lizard" data-lizard="dragon" class="btn btn-default btn-lg vis-button">Lizard</button>
 
     </header>
 
@@ -24,11 +24,21 @@
         $("#lizard").on("click", function () {
             console.log ("welcome");
 
-        var lizards = $.get("https://api.giphy.com/v1/gifs/search?q=lizards&api_key=7gUqZcYcub8Ff1HgpcwaYhl5N0a6EtDb&limit=5");
-        lizards.done(function (d) {
-            console.log(d.data);
+            var l = $(this).attr("dragon");
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=lizards" +
+         "&api_key=7gUqZcYcub8Ff1HgpcwaYhl5N0a6EtDb&limit=5";
+
+      
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        
+        .then(function (response) {
+
+            console.log(response);
              
-            var results = d.data;
+            var results = response.data;
             for (var i = 0; i < results.length; i++)
             
             if (results[i].rating == "g") {
