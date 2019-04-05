@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GIPHY-homework6</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header>
+        <h1> Click the buttoms for surprise</h1>
+        <button id="animal-button" class="btn btn-default btn-lg vis-button">Lizard</button>
+
+    </header>
+
+    <div id="animal-gif"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script>
+
+        $("#animal-button").on("click", function () {
+            console.log ("welcome");
+
+        var lizards = $.get("http://api.giphy.com/v1/gifs/search?q=lizards&api_key=7gUqZcYcub8Ff1HgpcwaYhl5N0a6EtDb&limit=5");
+        lizards.done(function (d) {
+            console.log(d.data);
+
+            var lizardsImage = $("<div>");
+            var lizardsImage = $("<img>");
+            $("#animal-gif").val();
+            
+            var imageUrl=data.images.fixed_height_still;
+       
+        lizardsImage.attr(imageUrl);
+        lizardsImage.attr("alt", "lizard image");
+        $("#animal-gif").prepend("src",lizardsImage);
+            
+        });
+    });
+       
+    </script>
+</body>
+</html>
