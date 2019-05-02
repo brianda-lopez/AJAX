@@ -5,27 +5,39 @@
     <title>GIPHY-homework6</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
     <header>
-        <h1> Click the buttoms for surprise</h1>
-        <button id="lizard" data-lizard="dragon" class="btn btn-default btn-lg vis-button">Lizard</button>
+        <h2> Write your request for searching any Giphy and then submit it.
+             To clear your seraching, press the clear button.
+        </h2>
+ 
+    <div class="container">
+    
+      <input type="form" id="searchTerm">
+
+      <button id="lizard" class="btn btn-default btn-lg vis-button">Submit</button>
+    <div class="reset">
+      <button id="reset" class="btn btn-default btn-lg vis-button">Clear</button>
+    </div>
 
     </header>
 
     <div id="animal-gif"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div id="animal-clear"></div>
     
     <script>
 
+
+
         $("#lizard").on("click", function () {
             console.log ("welcome");
-
+            var searchTerm = $("#searchTerm").val();
             var l = $(this).attr("dragon");
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=lizards" +
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm +
          "&api_key=7gUqZcYcub8Ff1HgpcwaYhl5N0a6EtDb&limit=5";
 
       
@@ -47,19 +59,35 @@
 
               var rating = results[i].rating;
 
-              var lizzy = $("<p>").text("Rating: " + rating);
+             //var lizzy = $("<p>").text("Rating: " + rating);
 
               var lizardImage = $("<img>");
              
               lizardImage.attr("src", results[i].images.fixed_height.url);
               
-              gifDiv.append(lizzy);
+              //gifDiv.append(lizzy);
               gifDiv.append(lizardImage);
               $("#animal-gif").prepend(gifDiv);
             }
           }
         );
     });
+
+    $("#reset").click(function() {
+      console.log("clear");
+      var imgs = document.querySelectorAll('img');
+  for(var i=0; i<imgs.length; i++){
+    imgs[i].parentNode.removeChild(imgs[i]);
+  }
+  document.getElementById("score").innerHTML = "";
+
+    //$(this).closest('form').find("input[type=text], textarea").val("");
+});
+
+
+
+
+      
   </script>
 
 </body>
